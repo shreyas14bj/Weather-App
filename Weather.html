@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather App</title>
+    <link rel="stylesheet" href="Weather.CSS">
+  </head>
+  <body>
+    <div class="weather-container">
+      <h1>Weather App</h1>
+      <label for="temperature">Enter Temperature (°C):</label>
+      <input
+        type="number"
+        id="temperature"
+        placeholder="Enter the temperature"
+      />
+      <div id="error-message"></div>
+      <button onclick="getWeather()">Get Weather</button>
+      <button onclick="resetWeather()">Reset</button>
+      <h2 id="weather">The weather right now is: Not Updated</h2>
+    </div>
+
+    <script>
+      function getWeather() {
+        let temp = document.getElementById("temperature").value;
+        let weatherText = document.getElementById("weather");
+        let errorMessage = document.getElementById("error-message");
+
+        // Clear previous error messages
+        errorMessage.textContent = "";
+
+        if (temp === "") {
+          weatherText.textContent = "Please enter a temperature.";
+          return;
+        }
+
+        if (isNaN(temp)) {
+          errorMessage.textContent =
+            "Please enter a valid number for the temperature.";
+          weatherText.textContent = "The weather right now is: Not Updated";
+          return;
+        }
+
+        // Weather logic based on temperature
+        if (temp >= 30) {
+          weatherText.textContent = "The weather right now is: Hot";
+          document.body.style.background =
+            "linear-gradient(135deg, #ff5f6d, #ffc371)";
+        } else if (temp >= 20) {
+          weatherText.textContent = "The weather right now is: Normal";
+          document.body.style.background =
+            "linear-gradient(135deg, #d4e157, #8bc34a)";
+        } else {
+          weatherText.textContent = "The weather right now is: Cold";
+          document.body.style.background =
+            "linear-gradient(135deg, #00bcd4, #0288d1)";
+        }
+      }
+
+      function resetWeather() {
+        document.getElementById("temperature").value = "";
+        document.getElementById("weather").textContent =
+          "The weather right now is: Not Updated";
+        document.getElementById("error-message").textContent = "";
+        document.body.style.background = "#f0f4f8"; // Default background color
+      }
+    </script>
+  </body>
+</html>
